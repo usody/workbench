@@ -9,8 +9,8 @@ test_requires = [
 
 setup(
     name='ereuse-workbench',
-    version='14.0.0-beta',
-    url='https://github.com/ereuse/workbench',
+    version='14.1.0-beta',
+    url='https://github.com/usody/workbench',
     license='Affero',
     packages=find_packages(),
     description='Hardware report of the computer including components,' +

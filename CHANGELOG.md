@@ -8,7 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [12.1.1-beta]
 
 ## testing
-  [12.1.1-beta]
+  [14.1.0-beta]
+
+## [14.1.0-beta] - 2023/01/24
+- [added] new var settings version
+- [added] execute erwb in /mnt 
+- [added] cleanup bash history
+- [changed] settings folder name
+- [changed] snapshots folder name
+- [changed] execute erwb in /mnt
 
 ## [14.0.0-beta] - 2022/08/04
 - [added] upgrade base system to Debian 11
