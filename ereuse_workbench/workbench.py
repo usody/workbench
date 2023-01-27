@@ -44,7 +44,8 @@ class Workbench:
                  install: str = False,
                  server: urlutils.URL = None,
                  json: Path = None,
-                 debug: bool = False):
+                 debug: bool = False,
+                 settings_version: str = False):
         """
         Configures this Workbench.
 
@@ -105,7 +106,8 @@ class Workbench:
         self.json = json
         self.session = None
         self.debug = debug
-        self.snapshots_path = Path('/mnt/wb_snapshots')
+        self.snapshots_path = Path('/mnt/snapshots')
+        self.settings_version = WorkbenchConfig.VERSION or 'No Settings Version (NaN)'
 
         if self.server:
             # Override the parameters from the configuration from the server
@@ -172,6 +174,7 @@ class Workbench:
         """
 
         print('{}eReuse.org Workbench {}.'.format(Fore.CYAN, self.version))
+        print('{}Settings version: {}.'.format(Fore.CYAN, self.settings_version))
         if self.server:
             print('{}Connected to Workbench Server.'.format(Fore.CYAN))
 
