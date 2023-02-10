@@ -249,7 +249,24 @@ create_persistence_partition() {
     mkdir -p "${tmp_rw_mount}"
     ${SUDO} mount "$(pwd)/${rw_img_path}" "${tmp_rw_mount}"
     ${SUDO} mkdir -p "${tmp_rw_mount}/settings"
-    ${SUDO} touch "${tmp_rw_mount}/settings/settings.ini"
+    cat > "${tmp_rw_mount}/settings/settings.ini" <<END
+[settings]
+VERSION =
+
+DH_TOKEN =
+DH_HOST =
+DH_DATABASE =
+
+WB_BENCHMARK =
+WB_STRESS_TEST =
+WB_SMART_TEST =
+
+WB_ERASE =
+WB_ERASE_STEPS =
+WB_ERASE_LEADING_ZEROS =
+
+WB_DEBUG =
+END
     ${SUDO} mkdir -p "${tmp_rw_mount}/snapshots"
     ${SUDO} umount "${tmp_rw_mount}"
 
@@ -416,7 +433,14 @@ prepare_chroot_env() {
   ${SUDO} cp -r ../ereuse_workbench "${wb_dir}"
   ${SUDO} cp ../setup.py "${wb_dir}"
   ${SUDO} cp ../README.rst "${wb_dir}"
-  ${SUDO} cp ../examples/.profile "${WB_PATH}/chroot/root/"
+  cat > "${WB_PATH}/chroot/root/.profile" <<END
+stty -echo # Do not show what we type in terminal so it does not meddle with our nice output
+setterm -blank 0  # Do not suspend monitor
+dmesg -n 1 # Do not report *useless* system messages to the terminal
+cd /mnt
+erwb
+stty echo
+END
 }
 
 # thanks https://willhaley.com/blog/custom-debian-live-environment/
@@ -487,7 +511,7 @@ main() {
   if [ "${DEBUG:-}" ]; then
     WB_VERSION='debug'
   else
-    WB_VERSION='14.1.0-beta'
+    WB_VERSION='14.2.0-beta'
   fi
   wbiso_name="USODY_${WB_VERSION}"
   hostname='workbench-live'

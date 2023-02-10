@@ -107,7 +107,7 @@ class Workbench:
         self.session = None
         self.debug = debug
         self.snapshots_path = Path('/mnt/snapshots')
-        self.settings_version = WorkbenchConfig.VERSION or 'No Settings Version (NaN)'
+        self.settings_version = WorkbenchConfig.VERSION
 
         if self.server:
             # Override the parameters from the configuration from the server

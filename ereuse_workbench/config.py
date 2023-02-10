@@ -15,15 +15,15 @@ class WorkbenchConfig:
     )  # type: str
 
     ## Env variables for WB parameters
-    WB_BENCHMARK = config('WB_BENCHMARK', default=True, cast=bool)
+    WB_BENCHMARK = config('WB_BENCHMARK', default=False, cast=bool)
     WB_STRESS_TEST = config('WB_STRESS_TEST', default=0, cast=int)
     WB_SMART_TEST = config('WB_SMART_TEST', default='')
 
     ## Erase parameters
-    WB_ERASE = config('WB_ERASE', default='')
+    WB_ERASE = config('WB_ERASE', default='EraseBasic', cast=str)
     WB_ERASE_STEPS = config('WB_ERASE_STEPS', default=1, cast=int)
     WB_ERASE_LEADING_ZEROS = config('WB_ERASE_LEADING_ZEROS', default=False, cast=bool)
 
     WB_DEBUG = config('WB_DEBUG', default=True, cast=bool)
 
-    VERSION = config('VERSION', default='', cast=str)
+    VERSION = config('VERSION', default='Default Basic Erasure (DBE)', cast=str)
