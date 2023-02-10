@@ -126,18 +126,14 @@ def _submit(url: urlutils.URL, snapshot: Snapshot):
 def submit(url: urlutils.URL, snapshot: Snapshot):
     try:
         snapshot_server = _submit(url, snapshot)
-    except (requests.ConnectionError, requests.Timeout):
+    except (requests.ConnectionError, requests.Timeout) as e:
         print('{}No Internet.{}'.format(Fore.YELLOW, Style.RESET_ALL),
-              'Connect the computer to the Internet with an Ethernet cable to upload the report.',
-              'Trying again in 10 seconds...')
-        time.sleep(10)
-        submit(url, snapshot)
+              'We could not auto-upload the device. You can manually upload the snapshot.')
+
     except requests.HTTPError as e:
         print('{}We could not auto-upload the device.{}'.format(Fore.RED, Style.RESET_ALL))
         print('This can happen for some devices, like custom-built ones,',
               'that do not have or do not report a valid S/N.')
-        print('We can process them when this software is being deployed'
-              'with an eReuse.org Server, like the Devicetag.io Box, but not in the actual mode.')
         print('Contact us if you have any questions.')
         print('The technical error message is as follows:')
         print(e)
