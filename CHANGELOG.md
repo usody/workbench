@@ -4,11 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0.html)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## prod
-  [12.1.1-beta]
 
-## testing
-  [14.1.0-beta]
+## [14.2.0-beta] - 2023/02/22
+- [added] display path where the snapshots will be saved (rel #4255)
+- [added] print settings version at startup
+- [added] if no token or url in settings don't post snapshot (rel #4260)
+- [changed] improving feedback when there is no internet (rel #4254)
+- [changed] modify default settings values with basic erasure (rel #4253)
 
 ## [14.1.0-beta] - 2023/01/24
 - [added] new var settings version
