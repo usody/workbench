@@ -10,7 +10,7 @@ from subprocess import CalledProcessError
 
 import ereuse_utils
 from boltons import urlutils
-from colorama import Fore, init
+from colorama import Fore, init, Style
 from ereuse_utils import cmd
 from ereuse_utils.session import DevicehubClient, retry
 
@@ -248,6 +248,8 @@ class Workbench:
 
         snapshot.close()
         self.json.write_text(snapshot.to_json())
+        print('{}Snapshot successfully saved on:{}'.format(Fore.GREEN, Style.RESET_ALL))
+        print(Fore.CYAN + str(self.json))
         return snapshot
 
     @property
