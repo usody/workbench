@@ -124,25 +124,31 @@ def _submit(url: urlutils.URL, snapshot: Snapshot):
 
 
 def submit(url: urlutils.URL, snapshot: Snapshot):
-    try:
-        snapshot_server = _submit(url, snapshot)
-    except (requests.ConnectionError, requests.Timeout) as e:
-        print('{}No Internet.{}'.format(Fore.YELLOW, Style.RESET_ALL),
-              'We could not auto-upload the device. You can manually upload the snapshot.')
-
-    except requests.HTTPError as e:
-        print('{}We could not auto-upload the device.{}'.format(Fore.RED, Style.RESET_ALL))
-        print('This can happen for some devices, like custom-built ones,',
-              'that do not have or do not report a valid S/N.')
-        print('Contact us if you have any questions.')
-        print('The technical error message is as follows:')
-        print(e)
+    if (url.username and url.password) or WorkbenchConfig.DH_TOKEN == '':
+        print('{}Settings DH_TOKEN are empty.{}'.format(Fore.YELLOW, Style.RESET_ALL),
+            '{}We could not auto-upload the device. You can manually upload the snapshot.{}'.format(Fore.YELLOW, Style.RESET_ALL))
+    elif (WorkbenchConfig.DH_HOST or WorkbenchConfig.DH_DATABASE) == '':
+        print('{}Settings DEVICEHUB_URL are empty.{}'.format(Fore.YELLOW, Style.RESET_ALL),
+            '{}We could not auto-upload the device. You can manually upload the snapshot.{}'.format(Fore.YELLOW, Style.RESET_ALL))
     else:
-        url.username = ''
-        device_url = url.navigate(snapshot_server['device']['url'])
-        print('{}Uploaded.{}'.format(Fore.GREEN, Style.RESET_ALL),
-              'Your computer is at {}'.format(device_url.to_text()))
-        print('{}Press the power button to turn this PC off.{}'.format(Style.DIM, Style.NORMAL))
+        try:
+            snapshot_server = _submit(url, snapshot)
+        except (requests.ConnectionError, requests.Timeout) as e:
+            print('{}No Internet.{}'.format(Fore.YELLOW, Style.RESET_ALL),
+                '{}We could not auto-upload the device. You can manually upload the snapshot.{}'.format(Fore.YELLOW, Style.RESET_ALL))
+        except requests.HTTPError as e:
+            print('{}We could not auto-upload the device.{}'.format(Fore.RED, Style.RESET_ALL))
+            print('This can happen for some devices, like custom-built ones,',
+                'that do not have or do not report a valid S/N.')
+            print('Contact us if you have any questions.')
+            print('The technical error message is as follows:')
+            print(e)
+        else:
+            url.username = ''
+            device_url = url.navigate(snapshot_server['device']['url'])
+            print('{}Uploaded.{}'.format(Fore.GREEN, Style.RESET_ALL),
+                'Your computer is at {}'.format(device_url.to_text()))
+            print('{}Press the power button to turn this PC off.{}'.format(Style.DIM, Style.NORMAL))
 
 
 logging.config.dictConfig({
