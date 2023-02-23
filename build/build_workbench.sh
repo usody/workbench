@@ -249,24 +249,6 @@ create_persistence_partition() {
     mkdir -p "${tmp_rw_mount}"
     ${SUDO} mount "$(pwd)/${rw_img_path}" "${tmp_rw_mount}"
     ${SUDO} mkdir -p "${tmp_rw_mount}/settings"
-    cat > "${tmp_rw_mount}/settings/settings.ini" <<END
-[settings]
-VERSION =
-
-DH_TOKEN =
-DH_HOST =
-DH_DATABASE =
-
-WB_BENCHMARK =
-WB_STRESS_TEST =
-WB_SMART_TEST =
-
-WB_ERASE =
-WB_ERASE_STEPS =
-WB_ERASE_LEADING_ZEROS =
-
-WB_DEBUG =
-END
     ${SUDO} mkdir -p "${tmp_rw_mount}/snapshots"
     ${SUDO} umount "${tmp_rw_mount}"
 
