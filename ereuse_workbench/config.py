@@ -24,6 +24,4 @@ class WorkbenchConfig:
     WB_ERASE_STEPS = config('WB_ERASE_STEPS', default=1, cast=int)
     WB_ERASE_LEADING_ZEROS = config('WB_ERASE_LEADING_ZEROS', default=False, cast=bool)
 
-    WB_DEBUG = config('WB_DEBUG', default=True, cast=bool)
-
     VERSION = config('VERSION', default='Default Basic Erasure (DBE)', cast=str)
