@@ -23,3 +23,8 @@ install_WB_dependencies:
 	cat requirements.debian.txt | sudo xargs apt install -y
 	# Install WB python requirements
 	sudo pip3 install -r requirements.txt
+
+boot_iso:
+	sudo qemu-system-x86_64 \
+		-enable-kvm -m 2G -vga qxl -netdev user,id=wan -device virtio-net,netdev=wan,id=nic1 \
+		-drive format=raw,file=build/wbiso/USODY_debug.iso,cache=none,if=virtio
