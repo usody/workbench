@@ -124,7 +124,7 @@ def _submit(url: urlutils.URL, snapshot: Snapshot):
 
 
 def submit(url: urlutils.URL, snapshot: Snapshot):
-    if (url.username and url.password) or WorkbenchConfig.DH_TOKEN == '':
+    if WorkbenchConfig.DH_TOKEN == '':
         print('{}Settings DH_TOKEN are empty.{}'.format(Fore.YELLOW, Style.RESET_ALL),
             '{}We could not auto-upload the device. You can manually upload the snapshot.{}'.format(Fore.YELLOW, Style.RESET_ALL))
     elif (WorkbenchConfig.DH_HOST or WorkbenchConfig.DH_DATABASE) == '':

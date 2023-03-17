@@ -45,7 +45,7 @@ class Workbench:
                  server: urlutils.URL = None,
                  json: Path = None,
                  debug: bool = False,
-                 settings_version: str = False):
+                 settings_version: str = None):
         """
         Configures this Workbench.
 
