@@ -229,6 +229,7 @@ class Workbench:
         snapshot = Snapshot(self.uuid,
                             SnapshotSoftware.Workbench,
                             self.version,
+                            self.settings_version,
                             self.session,
                             self.debug)
         snapshot.computer()

@@ -42,6 +42,7 @@ class Snapshot(Dumpeable):
                  uuid: UUID,
                  software: SnapshotSoftware,
                  version: StrictVersion,
+                 settings_version,
                  session: Optional[DevicehubClient] = None,
                  debug=False) -> None:
         self.type = 'Snapshot'
@@ -49,6 +50,7 @@ class Snapshot(Dumpeable):
         self.uuid = uuid
         self.software = software
         self.version = version
+        self.settings_version = settings_version
         self.closed = False
         self.endTime = datetime.now(timezone.utc)
         self.elapsed = None
