@@ -1,3 +1,5 @@
+import random
+import string
 import logging
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -7,6 +9,7 @@ from subprocess import CalledProcessError
 from ereuse_utils import cmd
 
 from ereuse_workbench.utils import Dumpeable, Severity
+from ereuse_workbench.config import WorkbenchConfig
 
 
 class EraseType(Enum):
@@ -52,18 +55,19 @@ class Erase(Measurable):
                 raise
 
     def _run(self, dev: str):
-        if self._zeros:
-            # Erase zeros first to follow HMG IS5
-            step = Step(StepType.StepZero, self._callback)
-            step.erase_basic(dev)
-            self.steps.append(step)
-
-        for i in range(self._steps):
-            step = Step(StepType.StepRandom, self._callback)
-            if self.type == EraseType.EraseBasic:
+        for step_info in WorkbenchConfig.load_steps():
+            step = Step(
+                StepType.StepZero
+                if step_info.get('type') == 0 else
+                StepType.StepRandom,
+                self._callback,
+            )
+            if step_info.get('method') == 'EraseBasic':
                 step.erase_basic(dev)
-            else:
+            elif step_info.get('method') == 'EraseSector':
                 step.erase_sectors(dev)
+            else:
+                print(f"Unknown step {step_info.get('method')}.")
             self.steps.append(step)
 
     @staticmethod
@@ -118,13 +122,21 @@ class Step(Measurable):
         logging.info('%s %s with Erase Sectors', self.type, dev)
         with self._manage_erasure(dev):
             self._badblocks = True
-            progress = cmd.ProgressiveCmd('badblocks', '-st',
-                                          '0x00' if self.type == StepType.StepZero else 'random',
-                                          '-w', dev,
-                                          number_chars=cmd.ProgressiveCmd.DECIMALS,
-                                          decimal_numbers=2,
-                                          read=35,
-                                          callback=self._call)
+            if self.type == StepType.StepRandom:
+                # Create hexadecimal pattern.
+                erasure_pattern = '0x' + ''.join(
+                    random.choice(string.hexdigits) for _ in range(8))
+            else:
+                # Write zeros.
+                erasure_pattern = "0"
+            progress = cmd.ProgressiveCmd(
+                'badblocks', '-st', erasure_pattern,
+                '-w', dev,
+                number_chars=cmd.ProgressiveCmd.DECIMALS,
+                decimal_numbers=2,
+                read=35,
+                callback=self._call
+            )
             progress.run()
 
     def _call(self, increment, percentage):
