@@ -187,8 +187,8 @@ class Workbench:
         if self.smart:
             actions.append('{} SMART test'.format(self.smart))
         if self.erase:
-            zeros = ' and extra erasure with zeros' if self.erase_leading_zeros else ''
-            actions.append('{} with {} steps{}'.format(self.erase, self.erase_steps, zeros))
+            dynamic_steps = WorkbenchConfig.load_steps().count()
+            actions.append('Erasure with {} steps.'.format(dynamic_steps))
         if self.install:
             actions.append('installing {}'.format(self.install))
 
