@@ -26,14 +26,17 @@ class WorkbenchConfig:
                                     cast=bool)
 
     # Todo: Improve the method to get dynamic step values.
-    WB_ERASE_1_METHOD = "EraseSector"
-    WB_ERASE_1_TYPE = 1
+    WB_ERASE_1_METHOD = config('WB_ERASE_1_METHOD', default=None)
+    WB_ERASE_1_TYPE = config('WB_ERASE_1_TYPE', default=None)
 
-    WB_ERASE_2_METHOD = "EraseBasic"
-    WB_ERASE_2_TYPE = 0
+    WB_ERASE_2_METHOD = config('WB_ERASE_2_METHOD', default=None)
+    WB_ERASE_2_TYPE = config('WB_ERASE_2_TYPE', default=None)
 
-    WB_ERASE_3_METHOD = config('WB_ERASE_3_METHOD', default="EraseBasic", cast=str)
-    WB_ERASE_3_TYPE = config('WB_ERASE_3_TYPE', default=1, cast=int)
+    WB_ERASE_3_METHOD = config('WB_ERASE_3_METHOD', default=None)
+    WB_ERASE_3_TYPE = config('WB_ERASE_3_TYPE', default=None)
+
+    WB_ERASE_4_METHOD = config('WB_ERASE_4_METHOD', default=None)
+    WB_ERASE_4_TYPE = config('WB_ERASE_4_TYPE', default=None)
 
     VERSION = config('VERSION', default='Default Basic Erasure (DBE)',
                      cast=str)
