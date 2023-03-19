@@ -42,10 +42,13 @@ class Erase(Measurable):
         self._callback = callback
 
     def run(self, dev: str):
-        logging.info('%s %s with %s steps and zeros %s', self.type, dev, self._steps, self._zeros)
+        dynamic_steps = WorkbenchConfig.load_steps()
+        logging.info(f'Erasure with {dynamic_steps.count()} steps.')
+        if WorkbenchConfig.WB_ERASE_CONFIRMATION:
+            input('Press Enter key to start with the data erasure process.')
         with self.measure():
             try:
-                self._run(dev)
+                self._run(dev, dynamic_steps)
             except CannotErase:
                 self.severity = Severity.Error
                 raise
@@ -54,7 +57,7 @@ class Erase(Measurable):
                 logging.exception(e)
                 raise
 
-    def _run(self, dev: str):
+    def _run(self, dev: str, dynamic_steps):
         for step_info in WorkbenchConfig.load_steps():
             step = Step(
                 StepType.StepZero
