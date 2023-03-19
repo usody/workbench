@@ -43,7 +43,7 @@ class Erase(Measurable):
 
     def run(self, dev: str):
         dynamic_steps = WorkbenchConfig.load_steps()
-        logging.info(f'Erasure with {dynamic_steps.count()} steps.')
+        logging.info(f'Erasure with {len(dynamic_steps)} steps.')
         if WorkbenchConfig.WB_ERASE_CONFIRMATION:
             input('Press Enter key to start with the data erasure process.')
         with self.measure():
