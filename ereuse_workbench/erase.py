@@ -58,7 +58,7 @@ class Erase(Measurable):
         for step_info in WorkbenchConfig.load_steps():
             step = Step(
                 StepType.StepZero
-                if step_info.get('type') == 0 else
+                if step_info.get('type') == '0' else
                 StepType.StepRandom,
                 self._callback,
             )
