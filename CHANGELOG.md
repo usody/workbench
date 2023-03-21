@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [added] ask for confirmation to proceed with erasure (rel #4288)
 - [added] allow to define each erasure step within settings (rel #4294)
 - [added] print erasure steps on start
+- [changed] settings.ini.example file
 - [fixed] fix len dynamic steps
 - [fixed] thread step type value as str instead int
 
