@@ -45,7 +45,8 @@ class Erase(Measurable):
         dynamic_steps = WorkbenchConfig.load_steps()
         logging.info(f'Erasure with {len(dynamic_steps)} steps.')
         if WorkbenchConfig.WB_ERASE_CONFIRMATION:
-            input('Press Enter key to start with the data erasure process.')
+            input('-- Press ENTER key to start with the data erasure process --')
+            print(f'Starting data erasure process...')
         with self.measure():
             try:
                 self._run(dev, dynamic_steps)
@@ -67,7 +68,7 @@ class Erase(Measurable):
             )
             if step_info.get('method') == 'EraseBasic':
                 step.erase_basic(dev)
-            elif step_info.get('method') == 'EraseSector':
+            elif step_info.get('method') == 'EraseSectors':
                 step.erase_sectors(dev)
             else:
                 print(f"Unknown step {step_info.get('method')}.")
