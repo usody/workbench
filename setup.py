@@ -9,14 +9,13 @@ test_requires = [
 
 setup(
     name='ereuse-workbench',
-    version='14.3.0-beta',
+    version='14.4.0-beta',
     url='https://github.com/usody/workbench',
     license='Affero',
     packages=find_packages(),
     description='Hardware report of the computer including components,' +
                 ' testing, benchmarking, erasing, and installing an OS.',
     author='eReuse.org team',
-    author_email='x.bustamante@ereuse.org',
     python_requires='>=3.5.3',
     long_description=Path('README.rst').read_text(),
     install_requires=[

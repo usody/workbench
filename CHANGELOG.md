@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0.html)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [14.4.0-beta] - 2023/03/21
+- [added] ask for confirmation to proceed with erasure (rel #4288)
+- [added] allow to define each erasure step within settings (rel #4294)
+- [added] print erasure steps on start
+- [fixed] fix len dynamic steps
+- [fixed] thread step type value as str instead int
+
 ## [14.3.0-beta] - 2023/03/16
 - [added] boot_iso command in Makefile using qemu
 - [changed] write zeros or random depending on the erasure type (rel #4286)
