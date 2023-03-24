@@ -18,6 +18,7 @@ from ereuse_workbench.erase import CannotErase, Erase, EraseType
 from ereuse_workbench.install import CannotInstall, Install
 from ereuse_workbench.test import StressTest, Test, TestDataStorage, TestDataStorageLength
 from ereuse_workbench.utils import Dumpeable
+from ereuse_workbench.config import WorkbenchConfig
 
 
 @unique
@@ -161,6 +162,10 @@ class Snapshot(Dumpeable):
                         line.close_message(t, cli.danger('failed: {}'.format(test)))
                 self._submit_action(test, i)
             if erase:
+                #logging.info(f'Erasure with {len(dynamic_steps)} steps.')
+                if WorkbenchConfig.WB_ERASE_CONFIRMATION:
+                    input('-- Press ENTER key to start with the data erasure process --')
+                    print(f'\nStarting data erasure process...')
                 pos = total * bool(smart) + num
                 t = cli.title('{} {}'.format('Erase', storage.serial_number))
                 with Line(Erase.compute_total_steps(erase, erase_steps, zeros) * 100,
