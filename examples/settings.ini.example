@@ -1,25 +1,26 @@
 [settings]
+##Uncomment the lines with the preferred configuration.
+##Only one value can be assigned to each variable with the same name.
+
 VERSION = Example Basic Erasure (BE)
 
 DH_TOKEN = <token>
 DH_HOST = <host>
-DH_DATABASE = <database>
 
-WB_BENCHMARK = True
-WB_STRESS_TEST = 0
-WB_SMART_TEST = Short
+#WB_BENCHMARK = True
+#WB_STRESS_TEST = 5
+#WB_SMART_TEST = Short
 
-WB_ERASE_CONFIRMATION = True
+#WB_ERASE_CONFIRMATION = False
 
 WB_ERASE = EraseBasic
-WB_ERASE_STEPS = 1
-WB_ERASE_LEADING_ZEROS = False
+#WB_ERASE = EraseSectors
 
-WB_ERASE_1_METHOD = EraseBasic
-WB_ERASE_1_TYPE = 0
+WB_ERASE_1_STEP_TYPE = 0
+#WB_ERASE_1_STEP_TYPE = 1
 
-WB_ERASE_2_METHOD = EraseBasic
-WB_ERASE_2_TYPE = 1
+WB_ERASE_2_STEP_TYPE = 0
+#WB_ERASE_2_STEP_TYPE = 1
 
-WB_ERASE_3_METHOD = EraseSectors
-WB_ERASE_3_TYPE = 0
+WB_ERASE_3_STEP_TYPE = 0
+#WB_ERASE_3_STEP_TYPE = 1
