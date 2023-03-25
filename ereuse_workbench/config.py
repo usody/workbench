@@ -25,19 +25,19 @@ class WorkbenchConfig:
     WB_ERASE_LEADING_ZEROS = config('WB_ERASE_LEADING_ZEROS', default=False,
                                     cast=bool)
     WB_ERASE_CONFIRMATION = config('WB_ERASE_CONFIRMATION', default=True, cast=bool)
-                                
+                  
     # Todo: Improve the method to get dynamic step values.
-    WB_ERASE_1_METHOD = config('WB_ERASE_1_METHOD', default=None)
-    WB_ERASE_1_TYPE = config('WB_ERASE_1_TYPE', default=None)
+    WB_ERASE_1_METHOD = config('WB_ERASE_1_METHOD', default='')
+    WB_ERASE_1_STEP_TYPE = config('WB_ERASE_1_STEP_TYPE', default='')
 
-    WB_ERASE_2_METHOD = config('WB_ERASE_2_METHOD', default=None)
-    WB_ERASE_2_TYPE = config('WB_ERASE_2_TYPE', default=None)
+    WB_ERASE_2_METHOD = config('WB_ERASE_2_METHOD', default='')
+    WB_ERASE_2_STEP_TYPE = config('WB_ERASE_2_STEP_TYPE', default='')
 
-    WB_ERASE_3_METHOD = config('WB_ERASE_3_METHOD', default=None)
-    WB_ERASE_3_TYPE = config('WB_ERASE_3_TYPE', default=None)
+    WB_ERASE_3_METHOD = config('WB_ERASE_3_METHOD', default='')
+    WB_ERASE_3_STEP_TYPE = config('WB_ERASE_3_STEP_TYPE', default='')
 
-    WB_ERASE_4_METHOD = config('WB_ERASE_4_METHOD', default=None)
-    WB_ERASE_4_TYPE = config('WB_ERASE_4_TYPE', default=None)
+    WB_ERASE_4_METHOD = config('WB_ERASE_4_METHOD', default='')
+    WB_ERASE_4_STEP_TYPE = config('WB_ERASE_4_STEP_TYPE', default='')
 
     VERSION = config('VERSION', default='Default Basic Erasure (DBE)',
                      cast=str)
@@ -48,8 +48,10 @@ class WorkbenchConfig:
         for step in range(1, 99):
             try:
                 method = getattr(cls, f'WB_ERASE_{step}_METHOD')
-                erasure_type = getattr(cls, f'WB_ERASE_{step}_TYPE')
-                if method and erasure_type is not None:
+                erasure_type = getattr(cls, f'WB_ERASE_{step}_STEP_TYPE')
+                if (method is '') and (erasure_type is not ''):
+                    method = getattr(cls, f'WB_ERASE')
+                if method and erasure_type is not '':
                     steps.append({'method': method, 'type': erasure_type})
             except AttributeError:
                 break
