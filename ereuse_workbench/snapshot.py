@@ -162,9 +162,8 @@ class Snapshot(Dumpeable):
                         line.close_message(t, cli.danger('failed: {}'.format(test)))
                 self._submit_action(test, i)
             if erase:
-                #logging.info(f'Erasure with {len(dynamic_steps)} steps.')
                 if WorkbenchConfig.WB_ERASE_CONFIRMATION:
-                    input('-- Press ENTER key to start with the data erasure process --')
+                    input('-- Press ENTER key to start data erasure process (Ctrl+Z to Stop) --')
                     print(f'\nStarting data erasure process...')
                 pos = total * bool(smart) + num
                 t = cli.title('{} {}'.format('Erase', storage.serial_number))
