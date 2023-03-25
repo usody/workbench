@@ -76,7 +76,7 @@ class Erase(Measurable):
         if type == EraseType.EraseSectors:
             #  badblocks does an extra step to check
             steps += 1
-        return len(WorkbenchConfig.load_steps()) or steps
+        return len(WorkbenchConfig.load_steps())*2 or steps
 
 
 class StepType(Enum):
