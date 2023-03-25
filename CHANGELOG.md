@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0.html)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [14.4.1-beta] - 2023/03/25
+- [added] update method in load_steps
+- [added] in confirmation erasure process Ctrl+Z to Stop
+- [changed] improve settings.ini.example file
+- [fixed] display erase type at startup
+- [fixed] fix erase steps when compute total steps
+- [fixed] default values in dynamic steps
+
 ## [14.4.0-beta] - 2023/03/21
 - [added] ask for confirmation to proceed with erasure (rel #4288)
 - [added] allow to define each erasure step within settings (rel #4294)
