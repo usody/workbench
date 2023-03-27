@@ -3,8 +3,8 @@ VERSION = Example Basic Erasure (BE)
 DH_TOKEN = <token>
 DH_HOST = <host>
 
-##_Uncomment the lines with the preferred configuration.
-##_Only one value can be assigned to each variable with the same name.
+;;_Uncomment the lines with the preferred configuration.
+;;_Only one value can be assigned to each variable with the same name.
 
 #WB_BENCHMARK = True
 #WB_STRESS_TEST = 5
@@ -12,8 +12,17 @@ DH_HOST = <host>
 
 #WB_ERASE_CONFIRMATION = False
 
+;Erase Basic use a software-based fast non-100%-secured way of erasing data storage, using shred. 
+;   More info: https://en.wikipedia.org/wiki/Shred_(Unix)
+
 WB_ERASE = EraseBasic
+
+;Erase Sectors a secured-way of erasing data storages, checking sector-by-sector the erasure, using badblocks  
+;	More info: https://en.wikipedia.org/wiki/Badblocks
+
 #WB_ERASE = EraseSectors
+
+;Step Type defines the erasure pattern to be used. 1 is random pattern and 0 is all 0s
 
 WB_ERASE_1_STEP_TYPE = 0
 #WB_ERASE_1_STEP_TYPE = 1
