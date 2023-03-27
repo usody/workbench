@@ -28,7 +28,7 @@ class WorkbenchConfig:
                   
     # Todo: Improve the method to get dynamic step values.
     WB_ERASE_1_METHOD = config('WB_ERASE_1_METHOD', default='')
-    WB_ERASE_1_STEP_TYPE = config('WB_ERASE_1_STEP_TYPE', default='')
+    WB_ERASE_1_STEP_TYPE = config('WB_ERASE_1_STEP_TYPE', default=1)
 
     WB_ERASE_2_METHOD = config('WB_ERASE_2_METHOD', default='')
     WB_ERASE_2_STEP_TYPE = config('WB_ERASE_2_STEP_TYPE', default='')
