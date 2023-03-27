@@ -1,11 +1,10 @@
 [settings]
-##Uncomment the lines with the preferred configuration.
-##Only one value can be assigned to each variable with the same name.
-
 VERSION = Example Basic Erasure (BE)
-
 DH_TOKEN = <token>
 DH_HOST = <host>
+
+##_Uncomment the lines with the preferred configuration.
+##_Only one value can be assigned to each variable with the same name.
 
 #WB_BENCHMARK = True
 #WB_STRESS_TEST = 5
