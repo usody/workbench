@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [fixed] fix erase steps when compute total steps
 - [fixed] default values in dynamic steps
 - [fixed] confirmation once before erasure in multiple storages
+- [fixed] Default Basic Erasure (DBE) config
 
 ## [14.4.0-beta] - 2023/03/21
 - [added] ask for confirmation to proceed with erasure (rel #4288)
