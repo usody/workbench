@@ -167,7 +167,7 @@ class Workbench:
         except CalledProcessError as e:
             raise CannotMount('Did you umount?') from e
 
-    def run(self) -> Snapshot:
+    def run(self, terminal_settings) -> Snapshot:
         """
         Executes Workbench on this computer and
         returns a valid JSON for Devicehub.
@@ -196,7 +196,7 @@ class Workbench:
         print('{}Performing {}:'.format(Fore.CYAN, ', '.join(actions)))
 
         try:
-            snapshot = self._run()
+            snapshot = self._run(terminal_settings)
         except Exception as e:
             logging.error('Run failed:')
             logging.exception(e)
@@ -222,7 +222,7 @@ class Workbench:
         print('{}Workbench has finished properly \u2665'.format(Fore.GREEN))
         return snapshot
 
-    def _run(self) -> Snapshot:
+    def _run(self, terminal_settings) -> Snapshot:
         if self.server:
             self.usb_sneaky.start()
 
@@ -244,7 +244,8 @@ class Workbench:
                              self.erase,
                              self.erase_steps,
                              self.erase_leading_zeros,
-                             (self.install_path / self.install) if self.install else None)
+                             (self.install_path / self.install) if self.install else None,
+                             terminal_settings)
 
         snapshot.close()
         self.json.write_text(snapshot.to_json())
