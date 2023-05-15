@@ -175,7 +175,7 @@ class Snapshot(Dumpeable):
             if erase:
                 pos = total * bool(smart) + num
                 t = cli.title('{} {}'.format('Erase', storage.serial_number))
-                with Line(disable=True) as line, line.spin(t):
+                with Line() as line, line.spin(t):
                     progress = Progress(line, self.uuid, TestDataStorage, self._session, i)
                     try:
                         erasure = storage.erase(erase, erase_steps, zeros, progress)
