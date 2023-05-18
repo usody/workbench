@@ -120,8 +120,7 @@ class Snapshot(Dumpeable):
                 erase: EraseType = None,
                 erase_steps: int = None,
                 zeros: bool = None,
-                install = None,
-                terminal_settings = None):
+                install = None):
         """SMART tests, erases and installs an OS to all the data storage
         units in parallel following the passed-in parameters.
         """
@@ -132,7 +131,8 @@ class Snapshot(Dumpeable):
         if WorkbenchConfig.WB_ERASE_CONFIRMATION:
             # Clean keyboard buffer
             termios.tcflush(sys.stdin, termios.TCIOFLUSH)
-            input('--Press ENTER to start data erasure of all drives (Ctrl+C to Abort)--\n\n')
+            input(' -- Press ENTER to start data erasure of all drives (Ctrl+C to Abort) --')
+            print('\n')
 
         total = len(self._storages)
         lines = total * (bool(smart) + bool(erase) + bool(install))
@@ -143,8 +143,6 @@ class Snapshot(Dumpeable):
                 executor.submit(self._storage, pos, total, storage, smart, erase, erase_steps,
                                 zeros, install)
 
-        # Restore original terminal settings
-        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, terminal_settings)
 
     def _storage(self,
                  num: int,
@@ -173,6 +171,8 @@ class Snapshot(Dumpeable):
                         line.close_message(t, cli.danger('failed: {}'.format(test)))
                 self._submit_action(test, i)
             if erase:
+                # Clean keyboard buffer
+                termios.tcflush(sys.stdin, termios.TCIOFLUSH)
                 pos = total * bool(smart) + num
                 t = cli.title('{} {}'.format('Erase', storage.serial_number))
                 with Line() as line, line.spin(t):
@@ -250,11 +250,6 @@ class Progress:
         This call is compatible with the callback of ereuse-util's
         ``cmd.ProgressiveCmd``.
         """
-        logging.debug(
-            'Incr of %s for comp %s for %s. n is %s, total %s, percentage from source %s',
-            increment, self.component, self.action, self.line.n, self.line.total,
-            percentage
-        )
         self.line.update(increment)
         if self.session:
             self._submit(percentage)
