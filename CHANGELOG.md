@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [14.3.0-beta]
 
 ----
+## [14.4.2-beta] - 2023/05/16
+- [added] clears keyboard buffer
+- [changed] confirmation erasure process
+- [changed] erasure progress bar to spin animation
+
 ## [14.4.1-beta] - 2023/03/25
 - [added] update method in load_steps
 - [added] in confirmation erasure process Ctrl+Z to Stop
