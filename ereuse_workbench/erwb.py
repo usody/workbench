@@ -3,8 +3,8 @@ import subprocess
 import time
 from datetime import datetime, timezone
 
-import termios
 import sys
+import termios
 import click
 import ntplib
 import requests
@@ -73,20 +73,13 @@ storage units, saving the resulting report as 'out.json'.
               help='Add extra debug information to the resulting snapshot?')
 def erwb(**kwargs):
     click.clear()
-    # Get the current terminal attributes
-    terminal_settings = termios.tcgetattr(sys.stdin)
-
-    # Disable buffering
-    new_settings = termios.tcgetattr(sys.stdin)
-    new_settings[3] = new_settings[3] & ~termios.ICANON & ~termios.ECHO
-    termios.tcsetattr(sys.stdin, termios.TCSANOW, new_settings)
 
     _sync_time = kwargs.pop('sync_time')
     _submit = kwargs.pop('submit')
     workbench = Workbench(**kwargs)
     if _sync_time:
         sync_time()
-    snapshot = workbench.run(terminal_settings)
+    snapshot = workbench.run()
     print('\a')  # Bip!
     if kwargs.get('server', None):
         print('You can still link the computer.')
@@ -99,6 +92,9 @@ def erwb(**kwargs):
     if not _submit:
         _submit = urlutils.URL(WorkbenchConfig.DEVICEHUB_URL)
     submit(_submit, snapshot)
+
+    # Clean keyboard buffer before returning to prompt
+    termios.tcflush(sys.stdin, termios.TCIOFLUSH)
 
 
 def sync_time():
