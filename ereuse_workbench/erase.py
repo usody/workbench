@@ -72,7 +72,6 @@ class Erase(Measurable):
     @staticmethod
     def compute_total_steps(type: EraseType, erase_steps: int, erase_zeros: bool) -> int:
         """Gets the number of steps the erasure settings will cause."""
-        steps = erase_steps + int(erase_zeros)
         if type == EraseType.EraseSectors:
             #  badblocks does an extra step to check
             steps += 1

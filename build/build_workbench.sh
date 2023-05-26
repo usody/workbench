@@ -120,13 +120,13 @@ MENU COLOR tabmsg       31;40   #30ffffff #00000000 std
 # THIS IS WHAT IS RUNNING NOW! (isolinux)
 # disabled predicted names -> src https://michlstechblog.info/blog/linux-disable-assignment-of-new-names-for-network-interfaces/
 LABEL linux
-  MENU LABEL Workbench v14 [BIOS/ISOLINUX]
+  MENU LABEL Workbench 14 [BIOS/ISOLINUX]
   MENU DEFAULT
   KERNEL /live/vmlinuz
   APPEND initrd=/live/initrd boot=live net.ifnames=0 biosdevname=0 persistence
 
 LABEL linux
-  MENU LABEL Workbench v14 [BIOS/ISOLINUX] (nomodeset)
+  MENU LABEL Workbench 14 [BIOS/ISOLINUX] (nomodeset)
   MENU DEFAULT
   KERNEL /live/vmlinuz
   APPEND initrd=/live/initrd boot=live nomodeset
@@ -154,12 +154,13 @@ set timeout=1
 
 # If X has issues finding screens, experiment with/without nomodeset.
 
-menuentry "Workbench v14 [EFI/GRUB]" {
+
+menuentry "Workbench 14 [EFI/GRUB]" {
     linux (\$root)/live/vmlinuz boot=live
     initrd (\$root)/live/initrd
 }
 
-menuentry "Workbench v14 [EFI/GRUB] (nomodeset)" {
+menuentry "Workbench 14 [EFI/GRUB] (nomodeset)" {
     linux (\$root)/live/vmlinuz boot=live nomodeset
     initrd (\$root)/live/initrd
 }
