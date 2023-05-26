@@ -69,10 +69,11 @@ class Erase(Measurable):
     @staticmethod
     def compute_total_steps(type: EraseType, erase_steps: int, erase_zeros: bool) -> int:
         """Gets the number of steps the erasure settings will cause."""
-        steps = erase_steps + int(erase_zeros)
         if type == EraseType.EraseSectors:
             #  badblocks does an extra step to check
-            steps += 1
+            steps = erase_steps*2 + int(erase_zeros)
+        elif type == EraseType.EraseBasic: 
+            steps = erase_steps + int(erase_zeros)
         return steps
 
 
@@ -118,8 +119,8 @@ class Step(Measurable):
         logging.info('%s %s with Erase Sectors', self.type, dev)
         with self._manage_erasure(dev):
             self._badblocks = True
-            progress = cmd.ProgressiveCmd('badblocks', '-st',
-                                          '0x00' if self.type == StepType.StepZero else 'random',
+            progress = cmd.ProgressiveCmd('badblocks',
+                                          '-st', 'random',
                                           '-w', dev,
                                           number_chars=cmd.ProgressiveCmd.DECIMALS,
                                           decimal_numbers=2,

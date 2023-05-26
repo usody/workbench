@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0.html)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [14.3.0-beta] - 2023/03/16
+## [14.2.0-beta2] - 2023/05/23
+- [changed] downgrade version 14.3.0 to 14.2.0-beta1
+- [changed] boot menu name to Workbench 14
+- [changed] erasure function compute_total_steps
+
+## [14.2.0-beta1] - 2023/03/16
 - [added] boot_iso command in Makefile using qemu
 - [changed] write zeros or random depending on the erasure type (rel #4286)
 - [removed] WB_DEBUG settings variable
