@@ -24,7 +24,7 @@ class WorkbenchConfig:
     WB_ERASE_STEPS = config('WB_ERASE_STEPS', default=1, cast=int)
     WB_ERASE_LEADING_ZEROS = config('WB_ERASE_LEADING_ZEROS', default=False,
                                     cast=bool)
-    WB_ERASE_CONFIRMATION = config('WB_ERASE_CONFIRMATION', default=True, cast=bool)
+    WB_ERASE_CONFIRMATION = config('WB_ERASE_CONFIRMATION', default=False, cast=bool)
                   
     # Todo: Improve the method to get dynamic step values.
     WB_ERASE_1_METHOD = config('WB_ERASE_1_METHOD', default='')
