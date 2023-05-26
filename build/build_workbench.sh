@@ -154,6 +154,7 @@ set timeout=1
 
 # If X has issues finding screens, experiment with/without nomodeset.
 
+
 menuentry "Workbench 14 [EFI/GRUB]" {
     linux (\$root)/live/vmlinuz boot=live
     initrd (\$root)/live/initrd
@@ -493,7 +494,7 @@ main() {
   if [ "${DEBUG:-}" ]; then
     WB_VERSION='debug'
   else
-    WB_VERSION='14.2.0-beta2'
+    WB_VERSION='14.4.2-beta'
   fi
   wbiso_name="USODY_${WB_VERSION}"
   hostname='workbench-live'

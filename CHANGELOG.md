@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0.html)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## prod
+[14.2.0-beta]
+
+## testing
+[14.4.2-beta]
+
+----
+## [14.4.2-beta] - 2023/05/16
+- [added] clears keyboard buffer
+- [changed] confirmation erasure process
+- [changed] erasure progress bar to spin animation
+
+## [14.4.1-beta] - 2023/03/25
+- [added] update method in load_steps
+- [added] in confirmation erasure process Ctrl+Z to Stop
+- [changed] improve settings.ini.example file
+- [fixed] display erase type at startup
+- [fixed] fix erase steps when compute total steps
+- [fixed] default values in dynamic steps
+- [fixed] confirmation once before erasure in multiple storages
+- [fixed] Default Basic Erasure (DBE) config
+
+## [14.4.0-beta] - 2023/03/21
+- [added] ask for confirmation to proceed with erasure (rel #4288)
+- [added] allow to define each erasure step within settings (rel #4294)
+- [added] print erasure steps on start
+- [changed] settings.ini.example file
+- [fixed] fix len dynamic steps
+- [fixed] thread step type value as str instead int
+
 ## [14.2.0-beta2] - 2023/05/23
 - [changed] downgrade version 14.3.0 to 14.2.0-beta1
 - [changed] boot menu name to Workbench 14

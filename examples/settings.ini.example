@@ -3,14 +3,26 @@ VERSION = Example Basic Erasure (BE)
 
 DH_TOKEN = <token>
 DH_HOST = <host>
-DH_DATABASE = <database>
+DH_DATABASE = <db>
 
-WB_BENCHMARK = True
-WB_STRESS_TEST = 0
-WB_SMART_TEST = Short
+#WB_BENCHMARK = True
+#WB_STRESS_TEST = 5
+#WB_SMART_TEST = Short
+
+#WB_ERASE_CONFIRMATION = False
+
+;Erase Basic use a software-based fast non-100%-secured way of erasing data storage, using shred.
 
 WB_ERASE = EraseBasic
-WB_ERASE_STEPS = 1
-WB_ERASE_LEADING_ZEROS = False
 
-WB_DEBUG = True
+;Erase Sectors a secured-way of erasing data storages, checking sector-by-sector, using badblocks  
+
+#WB_ERASE = EraseSectors
+
+;Step Type defines the erasure pattern to be used. 1 is random pattern and 0 is all 0s
+
+WB_ERASE_1_STEP_TYPE = 1
+
+WB_ERASE_2_STEP_TYPE = 0
+
+#WB_ERASE_3_STEP_TYPE = 0

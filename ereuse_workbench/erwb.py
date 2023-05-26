@@ -3,6 +3,8 @@ import subprocess
 import time
 from datetime import datetime, timezone
 
+import sys
+import termios
 import click
 import ntplib
 import requests
@@ -71,6 +73,7 @@ storage units, saving the resulting report as 'out.json'.
               help='Add extra debug information to the resulting snapshot?')
 def erwb(**kwargs):
     click.clear()
+
     _sync_time = kwargs.pop('sync_time')
     _submit = kwargs.pop('submit')
     workbench = Workbench(**kwargs)
@@ -89,6 +92,9 @@ def erwb(**kwargs):
     if not _submit:
         _submit = urlutils.URL(WorkbenchConfig.DEVICEHUB_URL)
     submit(_submit, snapshot)
+
+    # Clean keyboard buffer before returning to prompt
+    termios.tcflush(sys.stdin, termios.TCIOFLUSH)
 
 
 def sync_time():

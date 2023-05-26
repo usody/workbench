@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import List, Optional, Tuple, Type, Union
 from uuid import UUID
 
+import sys
+import termios
 import inflection
 from ereuse_utils import cli
 from ereuse_utils.cli import Line
@@ -18,6 +20,7 @@ from ereuse_workbench.erase import CannotErase, Erase, EraseType
 from ereuse_workbench.install import CannotInstall, Install
 from ereuse_workbench.test import StressTest, Test, TestDataStorage, TestDataStorageLength
 from ereuse_workbench.utils import Dumpeable
+from ereuse_workbench.config import WorkbenchConfig
 
 
 @unique
@@ -117,13 +120,19 @@ class Snapshot(Dumpeable):
                 erase: EraseType = None,
                 erase_steps: int = None,
                 zeros: bool = None,
-                install=None):
+                install = None):
         """SMART tests, erases and installs an OS to all the data storage
         units in parallel following the passed-in parameters.
         """
         if not self._storages:
             cli.warning('No data storage units.')
             return
+        
+        if WorkbenchConfig.WB_ERASE_CONFIRMATION:
+            # Clean keyboard buffer
+            termios.tcflush(sys.stdin, termios.TCIOFLUSH)
+            input(' -- Press ENTER to start data erasure of all drives (Ctrl+C to Abort) --')
+            print('\n')
 
         total = len(self._storages)
         lines = total * (bool(smart) + bool(erase) + bool(install))
@@ -133,6 +142,7 @@ class Snapshot(Dumpeable):
             for pos, storage in enumerate(self._storages):
                 executor.submit(self._storage, pos, total, storage, smart, erase, erase_steps,
                                 zeros, install)
+
 
     def _storage(self,
                  num: int,
@@ -161,11 +171,11 @@ class Snapshot(Dumpeable):
                         line.close_message(t, cli.danger('failed: {}'.format(test)))
                 self._submit_action(test, i)
             if erase:
+                # Clean keyboard buffer
+                termios.tcflush(sys.stdin, termios.TCIOFLUSH)
                 pos = total * bool(smart) + num
                 t = cli.title('{} {}'.format('Erase', storage.serial_number))
-                with Line(Erase.compute_total_steps(erase, erase_steps, zeros) * 100,
-                          desc=t,
-                          position=pos) as line:
+                with Line() as line, line.spin(t):
                     progress = Progress(line, self.uuid, TestDataStorage, self._session, i)
                     try:
                         erasure = storage.erase(erase, erase_steps, zeros, progress)
@@ -240,11 +250,6 @@ class Progress:
         This call is compatible with the callback of ereuse-util's
         ``cmd.ProgressiveCmd``.
         """
-        logging.debug(
-            'Incr of %s for comp %s for %s. n is %s, total %s, percentage from source %s',
-            increment, self.component, self.action, self.line.n, self.line.total,
-            percentage
-        )
         self.line.update(increment)
         if self.session:
             self._submit(percentage)
