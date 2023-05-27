@@ -72,10 +72,7 @@ class Erase(Measurable):
     @staticmethod
     def compute_total_steps(type: EraseType, erase_steps: int, erase_zeros: bool) -> int:
         """Gets the number of steps the erasure settings will cause."""
-        if type == EraseType.EraseSectors:
-            #  badblocks does an extra step to check
-            steps += 1
-        return len(WorkbenchConfig.load_steps())*2 or steps
+        return len(WorkbenchConfig.load_steps())*2
 
 
 class StepType(Enum):
@@ -131,8 +128,6 @@ class Step(Measurable):
                 'badblocks', '-st', erasure_pattern,
                 '-w', dev,
                 number_chars=cmd.ProgressiveCmd.DECIMALS,
-                decimal_numbers=2,
-                read=35,
                 callback=self._call
             )
             progress.run()
