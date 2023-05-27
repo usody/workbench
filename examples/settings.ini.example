@@ -9,20 +9,21 @@ DH_DATABASE = <db>
 #WB_STRESS_TEST = 5
 #WB_SMART_TEST = Short
 
-#WB_ERASE_CONFIRMATION = False
+;Uncomment the following line to activate confirmation before data erasure
+#WB_ERASE_CONFIRMATION = True
 
 ;Erase Basic use a software-based fast non-100%-secured way of erasing data storage, using shred.
-
 WB_ERASE = EraseBasic
 
 ;Erase Sectors a secured-way of erasing data storages, checking sector-by-sector, using badblocks  
-
 #WB_ERASE = EraseSectors
 
 ;Step Type defines the erasure pattern to be used. 1 is random pattern and 0 is all 0s
+WB_ERASE_1_STEP_TYPE = 0
+WB_ERASE_1_METHOD = EraseBasic
 
-WB_ERASE_1_STEP_TYPE = 1
-
-WB_ERASE_2_STEP_TYPE = 0
+#WB_ERASE_2_STEP_TYPE = 1
+#WB_ERASE_2_METHOD = EraseSectors
 
 #WB_ERASE_3_STEP_TYPE = 0
+#WB_ERASE_3_METHOD = 
