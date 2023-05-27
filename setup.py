@@ -9,7 +9,7 @@ test_requires = [
 
 setup(
     name='ereuse-workbench',
-    version='14.4.2-beta',
+    version='14.4.2-beta1',
     url='https://github.com/usody/workbench',
     license='Affero',
     packages=find_packages(),

@@ -143,7 +143,6 @@ class Snapshot(Dumpeable):
                 executor.submit(self._storage, pos, total, storage, smart, erase, erase_steps,
                                 zeros, install)
 
-
     def _storage(self,
                  num: int,
                  total: int,

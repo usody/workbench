@@ -8,9 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [14.2.0-beta]
 
 ## testing
-[14.4.2-beta]
+[14.4.2-beta1]
 
 ----
+
+## [14.4.2-beta1] - 2023/05/26
+- [changed] erasure function compute_total_steps
+- [changed] WB_ERASE_CONFIRMATION default False
+- [changed] settings.ini.example
+
 ## [14.4.2-beta] - 2023/05/16
 - [added] clears keyboard buffer
 - [changed] confirmation erasure process
