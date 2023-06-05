@@ -125,7 +125,8 @@ def _submit(url: urlutils.URL, snapshot: Snapshot):
                      headers={
                          'Authorization': 'Basic {}'.format(t),
                          'Content-Type': 'application/json'
-                     })
+                     },
+                     timeout=60)
     return r.json()
 
 
