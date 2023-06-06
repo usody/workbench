@@ -4,10 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0.html)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## prod
+[14.2.0-beta2]
+
+## testing
+[14.4.2-beta2]
+
+----
 ## [14.2.0-beta2] - 2023/05/23
-- [changed] downgrade version 14.3.0 to 14.2.0-beta1
+- [changed] downgrade version 14.3.0 to 14.2.0-beta2
 - [changed] boot menu name to Workbench 14
 - [changed] erasure function compute_total_steps
+- [fixed] request post snapshot increase timeout (rel #4406)
 
 ## [14.2.0-beta1] - 2023/03/16
 - [added] boot_iso command in Makefile using qemu
