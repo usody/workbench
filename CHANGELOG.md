@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [14.2.0-beta]
 
 ## testing
-[14.4.2-beta1]
+[14.4.2-beta2]
 
 ----
+## [14.4.2-beta2] - 2023/06/05
+- [fixed] request post snapshot increase timeout (rel #4406)
 
 ## [14.4.2-beta1] - 2023/05/26
 - [changed] erasure function compute_total_steps

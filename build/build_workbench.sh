@@ -494,7 +494,7 @@ main() {
   if [ "${DEBUG:-}" ]; then
     WB_VERSION='debug'
   else
-    WB_VERSION='14.4.2-beta1'
+    WB_VERSION='14.4.2-beta2'
   fi
   wbiso_name="USODY_${WB_VERSION}"
   hostname='workbench-live'
